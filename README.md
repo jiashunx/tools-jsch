@@ -1,2 +1,16 @@
-# tools-jsch
-对jsch库的二次封装，用于远程执行Linux命令并获取响应
+
+### tools-jsch
+
+- 项目简介：封装JSCH实现的工具包（用于执行Linux命令并获取响应）
+
+- maven依赖
+
+```text
+<dependency>
+    <groupId>io.github.jiashunx</groupId>
+    <artifactId>tools-jsch</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+- demo参考：[SSHExecutorTest](./src/test/java/io/github/jiashunx/tools/jsch/SSHExecutorTest.java)
