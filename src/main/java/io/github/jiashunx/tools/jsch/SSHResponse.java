@@ -1,5 +1,8 @@
 package io.github.jiashunx.tools.jsch;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 /**
  * @author jiashunx
  */
@@ -86,6 +89,13 @@ public class SSHResponse {
     }
     public void setErrorContent(String errorContent) {
         this.errorContent = errorContent;
+    }
+    public void setErrorContent(Throwable throwable) {
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter printWriter = new PrintWriter(stringWriter)) {
+            throwable.printStackTrace(printWriter);
+            setErrorContent(stringWriter.toString());
+        }
     }
     public boolean isSuccess() {
         return success;

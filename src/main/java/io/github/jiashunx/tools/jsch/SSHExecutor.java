@@ -176,9 +176,9 @@ public class SSHExecutor {
             response.setErrorContent(errorOutputStream.toString());
             response.setOutputContent(outputStream.toString());
             costMillis = System.currentTimeMillis() - startMillis;
-        } catch (Exception e) {
+        } catch (Throwable e) {
             response.setSuccess(false);
-            response.setErrorContent(e.getMessage());
+            response.setErrorContent(e);
             costMillis = System.currentTimeMillis() - startMillis;
         } finally {
             if (outputStream != null) {
