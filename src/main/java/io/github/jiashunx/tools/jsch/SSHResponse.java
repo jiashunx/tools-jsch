@@ -35,6 +35,7 @@ public class SSHResponse {
 
     /**
      * 获取错误输出内容行记录.
+     * @return String[]
      */
     public String[] getErrorContentLines() {
         String[] lines = null;
@@ -48,6 +49,7 @@ public class SSHResponse {
     }
     /**
      * 获取控制台输出内容行记录.
+     * @return String[]
      */
     public String[] getOutputContentLines() {
         String[] lines = null;
