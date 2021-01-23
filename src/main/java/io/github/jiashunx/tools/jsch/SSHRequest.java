@@ -1,6 +1,7 @@
 package io.github.jiashunx.tools.jsch;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 /**
  * @author jiashunx
@@ -63,15 +64,16 @@ public class SSHRequest {
      * @param commands 命令数组（支持多命令）
      */
     public SSHRequest(String remoteHost, int sshPort, String username, String password, String command, String...commands) {
-        this.remoteHost = remoteHost;
-        this.sshPort = sshPort;
-        this.username = username;
-        this.password = password;
-        this.commandArr = new String[commands.length + 1];
+        this(remoteHost, sshPort, username, password, mergeCommand(command, commands));
+    }
+
+    private static String[] mergeCommand(String command, String...commands) {
+        String[] commandArr = new String[commands.length + 1];
         commandArr[0] = command;
         for (int i = 0; i < commands.length; i++) {
             commandArr[i + 1] = commands[i];
         }
+        return commandArr;
     }
 
     /**
@@ -109,6 +111,18 @@ public class SSHRequest {
         if (commandArr == null) {
             commandArr = new String[] { SSHConst.STRING_NULL };
         }
+    }
+
+    public SSHRequest(SSHRequest request) {
+        this.remoteHost = request.remoteHost;
+        this.sshPort = request.sshPort;
+        this.username = request.username;
+        this.password = request.password;
+        this.sessionTimeoutMillis = request.sessionTimeoutMillis;
+        this.channelConnectTimeoutMillis = request.channelConnectTimeoutMillis;
+        String[] commandSrc = request.getCommandArr();
+        this.commandArr = new String[commandSrc.length];
+        System.arraycopy(commandSrc, 0, this.commandArr, 0, commandSrc.length);
     }
 
     @Override
